@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-
 import Modal from '../../General/modal/Modal';
 import CartItem from '../cartItem/CartItem';
 import MealItemType from '../../../types/MealItemType';
@@ -34,7 +32,6 @@ const Cart: React.FC<{ onClose: () => void }> = (props) => {
   );
   return (
     <Modal onClose={props.onClose}>
-      {/* <Fragment> */}
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -46,7 +43,6 @@ const Cart: React.FC<{ onClose: () => void }> = (props) => {
         </button>
         {/* {hasItems && <button className={classes.button}>Order</button>} */}
       </div>
-      {/* </Fragment> */}
     </Modal>
   );
 };
