@@ -7,7 +7,9 @@ const Backdrop: React.FC<{ onClose: () => void }> = (props) => {
   return <div className={classes.backdrop} onClick={props.onClose} />;
 };
 
-const ModalOverlay: React.FC<{ children: JSX.Element }> = (props) => {
+const ModalOverlay: React.FC<{ children: JSX.Element | JSX.Element[] }> = (
+  props
+) => {
   return (
     <div className={classes.modal}>
       <div className={classes.content}>{props.children}</div>
@@ -17,9 +19,10 @@ const ModalOverlay: React.FC<{ children: JSX.Element }> = (props) => {
 
 const portalElement = document.getElementById('overlays') as HTMLElement;
 
-const Modal: React.FC<{ children: JSX.Element; onClose: () => void }> = (
-  props
-) => {
+const Modal: React.FC<{
+  children: JSX.Element | JSX.Element[];
+  onClose: () => void;
+}> = (props) => {
   return (
     <Fragment>
       {createPortal(<Backdrop onClose={props.onClose} />, portalElement)}

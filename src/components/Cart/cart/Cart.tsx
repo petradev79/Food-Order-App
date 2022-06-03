@@ -34,19 +34,19 @@ const Cart: React.FC<{ onClose: () => void }> = (props) => {
   );
   return (
     <Modal onClose={props.onClose}>
-      <Fragment>
-        {cartItems}
-        <div className={classes.total}>
-          <span>Total Amount</span>
-          <span>5</span>
-        </div>
-        <div className={classes.actions}>
-          <button className={classes['button--alt']} onClick={props.onClose}>
-            Close
-          </button>
-          {/* {hasItems && <button className={classes.button}>Order</button>} */}
-        </div>
-      </Fragment>
+      {/* <Fragment> */}
+      {cartItems}
+      <div className={classes.total}>
+        <span>Total Amount</span>
+        <span>5</span>
+      </div>
+      <div className={classes.actions}>
+        <button className={classes['button--alt']} onClick={props.onClose}>
+          Close
+        </button>
+        {/* {hasItems && <button className={classes.button}>Order</button>} */}
+      </div>
+      {/* </Fragment> */}
     </Modal>
   );
 };
