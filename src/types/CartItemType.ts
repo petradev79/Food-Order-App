@@ -3,8 +3,6 @@ type CartItemType = {
   name: string;
   amount: number;
   price: number;
-  // onRemove: (id: string) => void;
-  // onAdd: (item: CartItemType) => void;
 };
 
 export type CartItemHandlerType = {
