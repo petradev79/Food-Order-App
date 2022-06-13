@@ -1,41 +1,28 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+
+import useHttp from '../../../hooks/use-http';
+import { db } from '../../../firebase/config';
 
 import Card from '../../General/card/Card';
 import MealItem from '../mealItem/MealItem';
 import classes from './Meals.module.css';
-
-const DUMMY_MEALS = [
-  {
-    id: 'm1',
-    name: 'Sushi',
-    description: 'Finest fish and veggies',
-    price: 22.99,
-    // amount: 1,
-  },
-  {
-    id: 'm2',
-    name: 'Schnitzel',
-    description: 'A german specialty!',
-    price: 16.5,
-    // amount: 1,
-  },
-  {
-    id: 'm3',
-    name: 'Barbecue Burger',
-    description: 'American, raw, meaty',
-    price: 12.99,
-    // amount: 1,
-  },
-  {
-    id: 'm4',
-    name: 'Green Bowl',
-    description: 'Healthy...and green...',
-    price: 18.99,
-    // amount: 1,
-  },
-];
+import MealItemType from '../../../types/MealItemType';
 
 const Meals: React.FC = () => {
+  const [meals, setMeals] = useState<MealItemType[]>([]);
+  const { isLoading, error, sendRequest: fetchMeals } = useHttp();
+
+  useEffect(() => {
+    const mealsCollectionRef = collection(db, 'meals');
+    const transformMeals = (mealsData: any) => {
+      setMeals(
+        mealsData.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+    fetchMeals(getDocs(mealsCollectionRef), transformMeals);
+  }, [fetchMeals]);
+
   const mealsSummary = (
     <section className={classes['meals-summary']}>
       <h2>Delicious Food, Delivered To You</h2>
@@ -50,7 +37,23 @@ const Meals: React.FC = () => {
     </section>
   );
 
-  const mealsList = DUMMY_MEALS.map((meal) => (
+  if (isLoading) {
+    return (
+      <section className={classes.mealsLodaing}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className={classes.mealsError}>
+        <p>{error}</p>
+      </section>
+    );
+  }
+
+  const mealsList = meals.map((meal: MealItemType) => (
     <MealItem
       key={meal.id}
       id={meal.id}

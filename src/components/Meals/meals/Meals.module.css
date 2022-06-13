@@ -5,6 +5,18 @@
   animation: meals-appear 1s ease-out forwards;
 }
 
+.mealsLodaing {
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+}
+
+.mealsError {
+  text-align: center;
+  color: red;
+  font-size: 2rem;
+}
+
 .meals ul {
   list-style: none;
   margin: 0;
