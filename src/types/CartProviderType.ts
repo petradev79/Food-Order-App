@@ -7,4 +7,5 @@ export type cartStateType = {
 
 export type cartActionType =
   | { type: 'ADD'; item: CartItemType }
-  | { type: 'REMOVE'; id: string };
+  | { type: 'REMOVE'; id: string }
+  | { type: 'CLEAR' };

@@ -1,10 +1,14 @@
 import { FormEvent, useRef, useState } from 'react';
+import UserType from '../../../types/UserType';
 import classes from './CartCheckout.module.css';
 
 const isEmpty = (value: string) => value.trim() === '';
 const isFiveChars = (value: string) => value.trim().length === 5;
 
-const CartCheckout: React.FC<{ onCancel: () => void }> = (props) => {
+const CartCheckout: React.FC<{
+  onCancel: () => void;
+  onConfirm: (userData: UserType) => void;
+}> = (props) => {
   const [formInputsValidity, setFormInputsValidity] = useState({
     name: true,
     street: true,
@@ -43,8 +47,16 @@ const CartCheckout: React.FC<{ onCancel: () => void }> = (props) => {
       enteredCityIsValid &&
       enteredPostalIsValid;
 
-    if (formIsValid) {
+    if (!formIsValid) {
+      return;
     }
+
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postal: enteredPostal,
+    });
   };
 
   const nameControlClasses = `${classes.control} ${
