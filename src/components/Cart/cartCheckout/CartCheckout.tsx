@@ -1,5 +1,6 @@
 import { FormEvent, useRef, useState } from 'react';
 import UserType from '../../../types/UserType';
+import Input from '../../General/input/Input';
 import classes from './CartCheckout.module.css';
 
 const isEmpty = (value: string) => value.trim() === '';
@@ -74,26 +75,50 @@ const CartCheckout: React.FC<{
 
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
-      <div className={nameControlClasses}>
-        <label htmlFor='name'>Your Name</label>
-        <input type='text' id='name' ref={nameInputRef} />
-        {!formInputsValidity.name && <p>Please enter a valid name!</p>}
-      </div>
-      <div className={streetControlClasses}>
-        <label htmlFor='street'>Street</label>
-        <input type='text' id='street' ref={streetInputRef} />
-        {!formInputsValidity.street && <p>Please enter a valid street!</p>}
-      </div>
-      <div className={postalControlClasses}>
-        <label htmlFor='postal'>Postal Code</label>
-        <input type='text' id='postal' ref={postalInputRef} />
-        {!formInputsValidity.postal && <p>Please enter a valid postal code!</p>}
-      </div>
-      <div className={cityControlClasses}>
-        <label htmlFor='city'>City</label>
-        <input type='text' id='city' ref={cityInputRef} />
-        {!formInputsValidity.city && <p>Please enter a valid city!</p>}
-      </div>
+      <Input
+        ref={nameInputRef}
+        label='Your Name'
+        className={nameControlClasses}
+        isValid={!formInputsValidity.name}
+        errorMessage='Please enter a valid name!'
+        input={{
+          id: 'name',
+          type: 'text',
+        }}
+      />
+      <Input
+        ref={streetInputRef}
+        label='Street'
+        className={streetControlClasses}
+        isValid={!formInputsValidity.street}
+        errorMessage='Please enter a valid street!'
+        input={{
+          id: 'street',
+          type: 'text',
+        }}
+      />
+      <Input
+        ref={postalInputRef}
+        label='Postal Code'
+        className={postalControlClasses}
+        isValid={!formInputsValidity.postal}
+        errorMessage='Please enter a valid postal code!'
+        input={{
+          id: 'postal',
+          type: 'text',
+        }}
+      />
+      <Input
+        ref={cityInputRef}
+        label='City'
+        className={cityControlClasses}
+        isValid={!formInputsValidity.city}
+        errorMessage='Please enter a valid city!'
+        input={{
+          id: 'city',
+          type: 'text',
+        }}
+      />
       <div className={classes.actions}>
         <button type='button' onClick={props.onCancel}>
           Cancel

@@ -35,6 +35,7 @@ const MealItemForm: React.FC<{
       <Input
         ref={amountInputRef}
         label='Amount'
+        className={classes.input}
         input={{
           id: `amount_${props.id}`,
           type: 'number',

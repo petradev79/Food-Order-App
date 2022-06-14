@@ -1,13 +1,12 @@
 import { forwardRef } from 'react';
-
-import classes from './Input.module.css';
 import InputType from '../../../types/InputType';
 
 const Input = forwardRef<HTMLInputElement, InputType>((props, ref) => {
   return (
-    <div className={classes.input}>
+    <div className={props.className}>
       <label htmlFor={props.input.id}>{props.label}</label>
       <input ref={ref} {...props.input} />
+      {props.isValid && <p>{props.errorMessage}</p>}
     </div>
   );
 });
